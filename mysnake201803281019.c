@@ -49,30 +49,21 @@ int main()
     while ( !gamestate.gameover)
     {
         drct= GetKeyBoard( drct);
-
         while (!_kbhit())
         {
-
-        NODE *tpsnakehead = (NODE *)malloc(sizeof(NODE));  // address cannot be lower such a numgroup adress
-        //GotoXY(2,1);printf("%d %d " ,psnakehead->x,psnakehead->y);
+        NODE *tpsnakehead = (NODE *)malloc(sizeof(NODE));  // address cannot be lower such a numgroup adress 
         psnakehead= GetSnakeHead( psnakehead,tpsnakehead, drct);
-        //GotoXY(12,1);printf("%d %d" ,psnakehead->x,psnakehead->y);
         gamestate= HitWallOrBody( psnakehead, food, gamestate);
         if (gamestate.gameover) break;
         DrawSnakeHead( psnakehead);
-        //GotoXY(2,2);printf("%d %d",gamestate.gameover,gamestate.score);
         food.counter= FoodEatOrNot( psnakehead, food);
-        //GotoXY(28,1);printf("%d %d %d" ,food.x,food.y,food.counter);
-        //GotoXY(2,2);printf("%d %d ", psnaketail->x, psnaketail->y);
         psnaketail= UpdateSnakeTail( psnaketail, food); //better to transfer pointer when structure is big
-        //GotoXY(2,2);printf("%d %d  %d %d",gamestate.gameover,gamestate.score,psnaketail->x,psnaketail->y);
 
         // first divide then converge
         food= ProduceFood( food);
-        Sleep( FreshTime);    // Sleep
+        Sleep( FreshTime);   
         }
     }
-
     EndGame(maplength, mapheight);
     getchar();
     return 0;
@@ -96,13 +87,13 @@ void InitBackground(int maplength, int mapheight)
     {
       if (i==0 || i==mapheight-1 )
       {
-        printf("¡ö");
+        printf("Â¡Ã¶");
         if (j==maplength-1) {printf("\n");break;}
       }
       else
       {
-        if ( j==0) printf("¡ö");
-        else if ( j==2*maplength-3) {printf("¡ö\n");break;}
+        if ( j==0) printf("Â¡Ã¶");
+        else if ( j==2*maplength-3) {printf("Â¡Ã¶\n");break;}
         else printf(" ");
       }
     }
@@ -113,7 +104,7 @@ void DrawSnake(NODE *psnakehead)
   while (cur!= NULL)
   {
     GotoXY(cur->x,cur->y);
-    printf("¡ñ");   // note use ascii code ,or
+    printf("Â¡Ã±");   // note use ascii code ,or
     cur= cur->next;
 
   }
@@ -121,7 +112,7 @@ void DrawSnake(NODE *psnakehead)
 void DrawSnakeHead( NODE *psnakehead)
 {
    GotoXY(psnakehead->x,psnakehead->y);
-   printf("¡ñ");
+   printf("Â¡Ã±");
 }
 
 char GetKeyBoard(char drct)
@@ -181,7 +172,7 @@ FOOD ProduceFood(FOOD food)
     food.y= rand()% (MapHeight-2)+1;
     food.counter++;
     GotoXY(food.x,food.y);
-    printf("¡ï");
+    printf("Â¡Ã¯");
   }
   return food;
 }
